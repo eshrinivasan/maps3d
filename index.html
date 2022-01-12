@@ -18,7 +18,7 @@
         height: 100%;
         width: 50%;
       }
-      
+
     </style>
   </head>
   <body>
@@ -26,10 +26,32 @@
     <div id="pano"></div>
 
     <!-- Async script executes immediately and must be after any DOM elements used in callback. -->
+
+    <script>
+        function initialize() {
+          const fenway = { lat: 42.345573, lng: -71.098326 };
+          const map = new google.maps.Map(document.getElementById("map"), {
+            center: fenway,
+            zoom: 14,
+          });
+          const panorama = new google.maps.StreetViewPanorama(
+            document.getElementById("pano"),
+            {
+              position: fenway,
+              pov: {
+                heading: 34,
+                pitch: 10,
+              },
+            }
+          );
+
+          map.setStreetView(panorama);
+        }
+        
+    </script>
     <script
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBp_WkpUppO5u3luDDsuB-qmZsJLyQBY3I&callback=initialize&v=weekly&channel=2"
       async
     ></script>
-    <script src="start.js"></script>
   </body>
 </html>
